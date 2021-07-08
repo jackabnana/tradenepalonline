@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}
+  {{ post.title_tag }}
+{% endblock %}
 
 {% block content %}
   <main id="main">
@@ -10,11 +13,11 @@
       <div class="container">
 
         <ol>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li>Blog Single</li>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Trade Nepal</a></li>
+          <li>Trade Bulletin</li>
         </ol>
-        <h2>Blog Single</h2>
+        <h2>Trade Bulletin</h2>
 
       </div>
     </section><!-- End Breadcrumbs -->
@@ -27,7 +30,7 @@
 
           <div class="col-lg-8 entries">
 
-            <article class="entry entry-single">
+            <Div class="container">
               <h1>{{ post.title }}</h1>
               <small>By: {{ post.author.first_name }}
                 {{ post.author.last_name }}
@@ -39,7 +42,8 @@
               {{ post.body }}
 
             
-            </article><!-- End blog entry -->
+            </div><!-- End blog entry -->
+            <button class="btn btn-primary"><a class="text-white" href="{% url 'add_post'%}">add new post</a></button>
 
             <div class="blog-author d-flex align-items-center">
               <img src="assets/img/blog/blog-author.jpg" class="rounded-circle float-left" alt="">
