@@ -9,6 +9,13 @@ from .models import Post
 def index (request):
     return render(request, 'index.html', {})
 
+def about (request):
+    return render(request, 'about.html', {})
+
 class BlogView(ListView):
     model = Post
     template_name = 'blog.html'
+
+class ArticleDetailView(DetailView):
+    model =Post
+    template_name = 'blog-single.html'

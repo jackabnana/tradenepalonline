@@ -5,8 +5,10 @@
 {% block content %}
 
  
-  <main id="main">
 
+
+  <main id="main">
+    
     <!-- ======= Breadcrumbs ======= -->
     <section class="breadcrumbs">
       <div class="container">
@@ -19,6 +21,21 @@
 
       </div>
     </section><!-- End Breadcrumbs -->
+    <ul>
+
+      {% for post in object_list%}
+        <li>
+         <a href="{% url 'article-detail' post.pk %}">{{ post.title}}</a>
+         {{ post.image }}
+          
+          <br/>
+          {{ post.body}}
+          {{ post.author}}
+        </li>
+    
+      {% endfor%}
+      </ul>
+
 
     <!-- ======= Blog Section ======= -->
     <section id="blog" class="blog">
