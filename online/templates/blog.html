@@ -27,14 +27,16 @@
         <li>
          <a href="{% url 'article-detail' post.pk %}">{{ post.title}}</a>
          {{ post.post_date }}
+         {{ post.category }}
           
           <br/>
-          {{ post.body}}
+          {{ post.body |slice:":50"|safe}}
           {{ post.author.first_name}}
           {{ post.author.last_name}}
           - 
           {% if user.is_authenticated %}
           <a href="{% url 'update_post' post.pk %}">Edit</a>
+          <a href="{% url 'delete_post' post.pk %}">Delete</a>
           {% endif %}
         </li>
     
@@ -129,21 +131,7 @@
               </div>
 
             </article><!-- End blog entry -->
-            <article class="entry">
-              <div class="entry-content">
-                <ul>
-
-                {% for post in object_list%}
-                  {{ post.image }}
-                  {{ post.title}}
-                  <br/>
-                  {{ post.body}}
-                  {{ post.author}}
-
-                {% endfor%}
-                </ul>
-              </div>
-            </article>
+            
 
             <article class="entry">
 

@@ -38,7 +38,7 @@
            
               <hr>
               <br/>
-              {{ post.body }}
+              {{ post.body|safe }}
               <button class="btn btn-primary">
               <a class="text-white" href="{% url 'update_post' post.pk %}">Edit</a>
               </button>
