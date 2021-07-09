@@ -17,6 +17,8 @@ def about (request):
 class BlogView(ListView):
     model = Post
     template_name = 'blog.html'
+    ordering = ['-id']
+    #ordering = ['-post_date']
 
 class ArticleDetailView(DetailView):
     model =Post

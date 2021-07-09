@@ -22,4 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     path('blog/', BlogView.as_view(), name="blog" ),
+    path('members/', include('django.contrib.auth.urls')),
+    path('members/', include('members.urls')),
 ]

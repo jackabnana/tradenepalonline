@@ -33,10 +33,9 @@
             <div class="form-group">
               <h1>{{ post.title }}</h1>
               <small>By: {{ post.author.first_name }}
-                {{ post.author.last_name }}
-              </small><br/>
-             
-              <img src="{{ post.image }}"/>
+                {{ post.author.last_name }}- {{ post.post_date }}
+            
+           
               <hr>
               <br/>
               {{ post.body }}
