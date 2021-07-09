@@ -30,7 +30,7 @@
 
           <div class="col-lg-8 entries">
 
-            <Div class="container">
+            <div class="form-group">
               <h1>{{ post.title }}</h1>
               <small>By: {{ post.author.first_name }}
                 {{ post.author.last_name }}
@@ -40,8 +40,10 @@
               <hr>
               <br/>
               {{ post.body }}
-
-            
+              <button class="btn btn-primary">
+              <a class="text-white" href="{% url 'update_post' post.pk %}">Edit</a>
+              </button>
+            <br/><br/><br/><br/><br/><br/><br/>
             </div><!-- End blog entry -->
             <button class="btn btn-primary"><a class="text-white" href="{% url 'add_post'%}">add new post</a></button>
 

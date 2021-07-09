@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-  {{ post.title_tag }}
+  Edit post
 {% endblock %}
 
 {% block content %}
@@ -24,7 +24,7 @@
       <div class="form-group p-5 ">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="btn btn-primary">Post</button>
+        <button class="btn btn-primary">Update</button>
       </div>
     </form>
   
