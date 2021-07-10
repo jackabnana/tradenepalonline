@@ -21,27 +21,7 @@
 
       </div>
     </section><!-- End Breadcrumbs -->
-    <ul>
-
-      {% for post in object_list%}
-        <li>
-         <a href="{% url 'article-detail' post.pk %}">{{ post.title}}</a>
-         {{ post.post_date }}
-         {{ post.category }}
-          
-          <br/>
-          {{ post.body |slice:":50"|safe}}
-          {{ post.author.first_name}}
-          {{ post.author.last_name}}
-          - 
-          {% if user.is_authenticated %}
-          <a href="{% url 'update_post' post.pk %}">Edit</a>
-          <a href="{% url 'delete_post' post.pk %}">Delete</a>
-          {% endif %}
-        </li>
     
-      {% endfor%}
-      </ul>
 
 
     <!-- ======= Blog Section ======= -->
@@ -53,32 +33,27 @@
           <div class="col-lg-8 entries">
 
             <article class="entry">
+              <ul>
 
-              <div class="entry-img">
-                <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
-              </div>
-
-              <h2 class="entry-title">
-                <a href="blog-single.html">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia</a>
-              </h2>
-
-              <div class="entry-meta">
-                <ul>
-                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">John Doe</a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li>
+                {% for post in object_list%}
+                  <li>
+                   <a href="{% url 'article-detail' post.pk %}">{{ post.title}}</a>
+                   {{ post.post_date }}
+                   <a href="{% url 'category' post.category|slugify %}"> {{post.category }}</a>
+                    
+                    <br/>
+                    {{ post.body |slice:":50"|safe}}
+                    {{ post.author.first_name}}
+                    {{ post.author.last_name}}
+                    - 
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'update_post' post.pk %}">Edit</a>
+                    <a href="{% url 'delete_post' post.pk %}">Delete</a>
+                    {% endif %}
+                  </li>
+              
+                {% endfor%}
                 </ul>
-              </div>
-
-              <div class="entry-content">
-                <p>
-                  Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
-                  Et eveniet enim. Qui velit est ea dolorem doloremque deleniti aperiam unde soluta. Est cum et quod quos aut ut et sit sunt. Voluptate porro consequatur assumenda perferendis dolore.
-                </p>
-                <div class="read-more">
-                  <a href="blog-single.html">Read More</a>
-                </div>
-              </div>
 
             </article><!-- End blog entry -->
 
@@ -187,14 +162,14 @@
 
               <h3 class="sidebar-title">Categories</h3>
               <div class="sidebar-item categories">
-                <ul>
-                  <li><a href="#">General <span>(25)</span></a></li>
-                  <li><a href="#">Lifestyle <span>(12)</span></a></li>
-                  <li><a href="#">Travel <span>(5)</span></a></li>
-                  <li><a href="#">Design <span>(22)</span></a></li>
-                  <li><a href="#">Creative <span>(8)</span></a></li>
-                  <li><a href="#">Educaion <span>(14)</span></a></li>
-                </ul>
+               
+                 <li>
+                  {% for item in cat_menu %}
+                  <a href="{% url 'category' item|slugify %}">{{item }}</a></br>
+                  {% endfor %}
+                </li>
+               
+              
               </div><!-- End sidebar categories-->
 
               <h3 class="sidebar-title">Recent Posts</h3>
@@ -258,6 +233,9 @@
     </section><!-- End Blog Section -->
 
   </main><!-- End #main -->
+  {% for item in cat_menu %}
+  {{ item }}</br>
+  {% endfor %}
 
   {% endblock content %}
   

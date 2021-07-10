@@ -5,43 +5,48 @@
 {% block content %}
 
  
+{% if category_posts %}
+
+      <main id="main">
+        
+        <!-- ======= Breadcrumbs ======= -->
+        <section class="breadcrumbs">
+          <div class="container">
+
+            <ol>
+              <li><a href="{%url 'home'%}">Home</a></li>
+              <li>Blog</li>
+            </ol>
+            <h2> {{ cats }} -category</h2>
+
+          </div>
+        </section><!-- End Breadcrumbs -->
+    <ul>
+    {% for post in category_posts %}
+    <li>
+      <a href="{% url 'article-detail' post.pk %}">{{ post.title}}</a>
+      -{{ post.post_date }}
+      -{{ post.category }}
+        <hr>
+        <br/>
+        {{ post.body |slice:":50"|safe}}
+        {{ post.author.first_name}}
+        {{ post.author.last_name}}
+        - 
+        {% if user.is_authenticated %}
+        <a href="{% url 'update_post' post.pk %}">Edit</a>
+        <a href="{% url 'delete_post' post.pk %}">Delete</a>
+        {% endif %}
+    </li>
 
 
-  <main id="main">
-    
-    <!-- ======= Breadcrumbs ======= -->
-    <section class="breadcrumbs">
-      <div class="container">
+    {% endfor %}
+    </ul>
 
-        <ol>
-          <li><a href="{%url 'home'%}">Home</a></li>
-          <li>Blog</li>
-        </ol>
-        <h2> {{ cats }} -category</h2>
-
-      </div>
-    </section><!-- End Breadcrumbs -->
-<ul>
-{% for post in category_posts %}
-<li>
-  <a href="{% url 'article-detail' post.pk %}">{{ post.title}}</a>
-  -{{ post.post_date }}
-  -{{ post.category }}
-    <hr>
-    <br/>
-    {{ post.body |slice:":50"|safe}}
-    {{ post.author.first_name}}
-    {{ post.author.last_name}}
-    - 
-    {% if user.is_authenticated %}
-    <a href="{% url 'update_post' post.pk %}">Edit</a>
-    <a href="{% url 'delete_post' post.pk %}">Delete</a>
-    {% endif %}
-</li>
-
-
-{% endfor %}
-</ul>
+{% else %}
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<h1> no category found </h1>
+{% endif %}
     
 
 
