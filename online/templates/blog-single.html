@@ -22,6 +22,10 @@
       </div>
     </section><!-- End Breadcrumbs -->
 
+    <br/>
+    <hr>
+    
+
     <!-- ======= Blog Single Section ======= -->
     <section id="blog" class="blog">
       <div class="container" data-aos="fade-up">
@@ -30,20 +34,42 @@
 
           <div class="col-lg-8 entries">
 
-            <div class="form-group">
-              current user: {{ user.id }}
-              <h1>{{ post.title }} - {{ post.author.id }}</h1>
+            <div class="blog-author d-flex align-items-center">
+              
+              <h1>{{ post.title }} - </h1>
               <small>By: {{ post.author.first_name }}
                 {{ post.author.last_name }}- {{ post.post_date }}
+                {% if user.is_authenticated %}
+                  {% if user.id == post.author.id %}
+                      <a href="{% url 'update_post' post.pk %}">Edit</a>
+                      <a href="{% url 'delete_post' post.pk %}">Delete</a>
+                  {% endif %}
+                {% endif %}
             
            
               <hr>
               <br/>
               {{ post.body|safe }}
-              <button class="btn btn-primary">
-              <a class="text-white" href="{% url 'update_post' post.pk %}">Edit</a>
-              </button>
-            <br/><br/><br/><br/><br/><br/><br/>
+              <form action="{% url 'like_post' post.pk %}"
+                method="POST">
+                {% csrf_token %}
+            
+            {% if user.is_authenticated %}
+
+                {% if liked %}
+                    <button type="submit", name="post_id", value ="{{ post.id }}" class="btn btn-danger btn-sm">UnLike</button>
+                {% else %}                    
+                    <button type="submit", name="post_id", value ="{{ post.id }}" class="btn btn-primary btn-sm">Like</button>
+                {% endif %}
+            {% else %}
+            <a class="nav-link scrollto" href="{%url 'login'%}">Login</a>
+            to like
+          
+            {% endif %}
+                -{{ total_likes }} Likes
+              </form>
+           
+              <br/><br/><br/><br/><br/><br/><br/>
             </div><!-- End blog entry -->
             <button class="btn btn-primary"><a class="text-white" href="{% url 'add_post'%}">add new post</a></button>
 
@@ -270,6 +296,7 @@
 
       </div>
     </section><!-- End Blog Single Section -->
+
 
 </main><!-- End #main -->
 
