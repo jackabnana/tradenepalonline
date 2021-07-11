@@ -42,7 +42,8 @@
                    <a href="{% url 'category' post.category|slugify %}"> {{post.category }}</a>
                     
                     <br/>
-                    {{ post.body |slice:":50"|safe}}
+                    {{ post.snippet }}
+                    <!--{{ post.body |slice:":50"|safe}} -->
                     {{ post.author.first_name}}
                     {{ post.author.last_name}}
                 {% if user.is_authenticated %}
