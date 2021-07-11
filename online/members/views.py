@@ -5,7 +5,14 @@ from django.views import generic
 from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm, UserChangeForm
 from django.urls import reverse_lazy
 from .forms import SignUpForm, EditProfileForm, PasswordChangingForm
+from django.views.generic import DetailView
+from blog.models import Profile
 
+
+
+class ShowProfilePageView(DetailView):
+    model = Profile
+    template_name = 'registration/user_profile.html'
 
 class PasswordsChangeView(PasswordChangeView):
     form_class = PasswordChangingForm
