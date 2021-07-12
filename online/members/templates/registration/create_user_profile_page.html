@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  profile page
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <section class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Trade Nepal</a></li>
+          <li>Trade Bulletin</li> 
+        </ol>
+        <h2>create profile</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+    <br/><br/><br/><br/><br/>
+    
+      <form method="POST" enctype="multipart/form-data">
+        <div class="form-group p-5 ">
+          {% csrf_token %}
+          
+          {{ form.as_p }}
+          <button class="btn btn-primary">create profile page</button>
+        </div>
+      </form>
+    
+    
+{% else %}
+<section class="breadcrumbs">
+  <div class="container">
+
+    <ol>
+      <li><a href="{%url 'home'%}">Home</a></li>
+      <li>Blog</li>
+    </ol>
+    <h2>Login to Add post</h2>
+
+  </div>
+</section><!-- End Breadcrumbs -->
+{% endif %}
+{% endblock content %}
