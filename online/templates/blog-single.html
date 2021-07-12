@@ -59,6 +59,8 @@
                 <br/>
                 <hr/>
               {{ post.body|safe }}
+              <hr/>
+
               <form action="{% url 'like_post' post.pk %}"
                 method="POST">
                 {% csrf_token %}
@@ -79,7 +81,22 @@
               </form>
               <br/><br/><br/><br/><br/><br/><br/>
             </div><!-- End blog entry -->
-            
+            <h2>comments...</h2>
+            <hr/>
+
+            {% if not post.comments.all %}
+             No comments yet..<a href="#">Add one</a>
+            {% else %}
+              {% for comment in post.comments.all %}
+                <strong>{{ comment.name }} - 
+                        {{ comment.date_added }}
+                </strong>
+                <br/>
+                {{ comment.body }}
+                <br/>    <br/>
+              {% endfor %}
+            {% endif %}
+            <br/>    <br/>    <br/>    <br/>    <br/>
             <div class="card mb-3" style="max-width: 540px;">
               <div class="row g-0">
                 <div class="col-md-4">
